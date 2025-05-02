@@ -10,3 +10,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="F:\D\vs code\html\flip timer\weather.css">
 </head>
+<body>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <header class="header">
+        <a href="#" class="logo">
+            <i class="fa-solid fa-cloud-sun"></i>
+            <span>WeatherPro</span>
+        </a>
+        <div class="search-container">
+            <i class="fa-solid fa-location-dot location-icon" id="get-location" title="Use current location"></i>
+            <input type="text" class="search-input" id="search-input" placeholder="Search for a city...">
+            <i class="fa-solid fa-search search-icon" id="search-button"></i>
+        </div>
+        <div class="header-actions">
+            <button class="action-button" id="dark-mode-toggle" title="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="action-button" title="Settings">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+        </div>
+    </header>
