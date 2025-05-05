@@ -22,3 +22,35 @@ const loadingElement = document.getElementById('loading');
         const windSpeedElement = document.getElementById('wind-speed');
         const humidityElement = document.getElementById('humidity');
         const uvIndexSimpleElement = document.getElementById('uv-index-simple');
+
+        const aqiBadgeElement = document.getElementById('aqi-badge');
+        const aqiSimpleElement = document.getElementById('aqi-simple');
+        const aqiValueElement = document.getElementById('aqi-value');
+        const aqiLevelElement = document.getElementById('aqi-level');
+        const aqiDescriptionElement = document.getElementById('aqi-description');
+        const aqiPollutantsElement = document.getElementById('aqi-pollutants');
+
+        const forecastTitleElement = document.getElementById('forecast-title');
+        const todayForecastElement = document.getElementById('today-forecast');
+        const hourlyForecastElement = document.getElementById('hourly-forecast');
+        const dailyForecastElement = document.getElementById('daily-forecast');
+
+
+        const feelsLikeElement = document.getElementById('feels-like');
+        const sunriseElement = document.getElementById('sunrise');
+        const sunsetElement = document.getElementById('sunset');
+        const sunIndicatorElement = document.getElementById('sun-indicator');
+        const highLowDetailElement = document.getElementById('high-low-detail');
+        const windElement = document.getElementById('wind');
+        const humidityDetailElement = document.getElementById('humidity-detail');
+        const dewPointElement = document.getElementById('dew-point');
+        const pressureElement = document.getElementById('pressure');
+        const uvIndexElement = document.getElementById('uv-index');
+        const visibilityElement = document.getElementById('visibility');
+        const cloudsElement = document.getElementById('clouds');
+
+        let currentCity = '';
+        let currentWeatherData = null;
+        let forecastData = null;
+        let aqiData = null;
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
