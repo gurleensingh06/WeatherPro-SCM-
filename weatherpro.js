@@ -508,3 +508,27 @@ const loadingElement = document.getElementById('loading');
                 aqiLevelElement.textContent = level;
                 aqiLevelElement.className = `aqi-level ${className}`;
                 aqiDescriptionElement.textContent = description;
+
+
+                aqiPollutantsElement.innerHTML = '';
+            
+            const pollutants = [
+                { name: 'PM2.5', value: components.pm2_5, unit: 'μg/m³' },
+                { name: 'PM10', value: components.pm10, unit: 'μg/m³' },
+                { name: 'O3 (Ozone)', value: components.o3, unit: 'μg/m³' },
+                { name: 'NO2', value: components.no2, unit: 'μg/m³' },
+                { name: 'SO2', value: components.so2, unit: 'μg/m³' },
+                { name: 'CO', value: components.co, unit: 'mg/m³' }
+            ];
+            
+            pollutants.forEach(pollutant => {
+                const pollutantHTML = `
+                    <div class="pollutant-item">
+                        <div class="pollutant-name">${pollutant.name}</div>
+                        <div class="pollutant-value">${pollutant.value.toFixed(1)}<span class="pollutant-unit">${pollutant.unit}</span></div>
+                    </div>
+                `;
+                
+                aqiPollutantsElement.innerHTML += pollutantHTML;
+            });
+        }
