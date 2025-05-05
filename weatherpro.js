@@ -465,4 +465,24 @@ const loadingElement = document.getElementById('loading');
                     const maxTemp = Math.max(...allTemps);
                     const minTemp = Math.min(...allTemps.map((_, i) => kelvinToCelsius(data.daily[i].temp.min)));
                     const range = maxTemp - minTemp;
+                    const barStart = ((tempMin - minTemp) / range) * 100;
+                    const barWidth = ((tempMax - tempMin) / range) * 100;
+                    
+                    const dailyHTML = `
+                        <div class="daily-item">
+                            <div class="daily-day">${day}</div>
+                            <div class="daily-icon">${icon}</div>
+                            <div class="daily-temp">
+                                <span class="temp-low">${tempMin}°</span>
+                                <div class="temp-bar-container">
+                                    <div class="temp-bar" style="margin-left: ${barStart}%; width: ${barWidth}%;"></div>
+                                </div>
+                                <span class="temp-high">${tempMax}°</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    dailyForecastElement.innerHTML += dailyHTML;
+                }
+            }
     
