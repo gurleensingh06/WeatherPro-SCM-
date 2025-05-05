@@ -33,3 +33,44 @@
             </button>
         </div>
     </header>
+
+    <div class="main-content">
+        <div class="container">
+            <section class="current-weather" id="current-weather">
+                <div class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span id="location-name">Loading...</span>
+                </div>
+                <div class="time" id="current-time">As of --:-- Local Time</div>
+                <div class="weather-display">
+                    <div class="temperature-container">
+                        <div class="temperature" id="current-temp">--°</div>
+                        <div class="weather-condition" id="weather-condition">--</div>
+                        <div class="high-low">
+                            <span><i class="fa-solid fa-arrow-up"></i> <span id="temp-high">--°</span></span>
+                            <span><i class="fa-solid fa-arrow-down"></i> <span id="temp-low">--°</span></span>
+                        </div>
+                    </div>
+                    <div class="weather-icon" id="weather-icon">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                </div>
+                <div class="weather-extras">
+                    <div class="weather-extra">
+                        <i class="fa-solid fa-wind"></i>
+                        <span id="wind-speed">-- km/h</span>
+                    </div>
+                    <div class="weather-extra">
+                        <i class="fa-solid fa-droplet"></i>
+                        <span id="humidity">--%</span>
+                    </div>
+                    <div class="weather-extra">
+                        <i class="fa-solid fa-sun"></i>
+                        <span id="uv-index-simple">--</span>
+                    </div>
+                    <div class="aqi-badge" id="aqi-badge">
+                        <i class="fa-solid fa-lungs"></i>
+                        <span id="aqi-simple">AQI: --</span>
+                    </div>
+                </div>
+            </section>
