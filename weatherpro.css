@@ -1234,32 +1234,26 @@ body {
 .toast-icon {
     font-size: 24px;
 }
-
 .toast-content {
     flex: 1;
 }
-
 .toast-title {
     font-weight: 600;
     margin-bottom: 5px;
 }
-
 .toast-close {
     color: var(--gray);
     cursor: pointer;
     font-size: 16px;
     padding: 5px;
 }
-
 .toast-close:hover {
     color: var(--dark);
 }
-
 @keyframes slideInRight {
     from { transform: translateX(100%); opacity: 0; }
     to { transform: translateX(0); opacity: 1; }
 }
-
 @keyframes slideOutRight {
     from { transform: translateX(0); opacity: 1; }
     to { transform: translateX(100%); opacity: 0; }
@@ -1273,7 +1267,6 @@ body {
     cursor: pointer;
     transition: var(--transition);
 }
-
 .dark-mode-toggle::after {
     content: '';
     position: absolute;
@@ -1286,11 +1279,9 @@ body {
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
 }
-
 .dark-mode .dark-mode-toggle {
     background-color: var(--primary);
 }
-
 .dark-mode .dark-mode-toggle::after {
     transform: translateX(24px);
 }
