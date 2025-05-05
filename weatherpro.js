@@ -703,3 +703,7 @@ const loadingElement = document.getElementById('loading');
                 showToast('info', 'Navigation', `You clicked: ${link.textContent.trim()}`);
             });
         });
+        if (isDarkMode) {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        }
