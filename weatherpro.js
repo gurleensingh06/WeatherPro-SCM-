@@ -683,3 +683,16 @@ const loadingElement = document.getElementById('loading');
             
                     document.querySelector('.card').scrollIntoView({ behavior: 'smooth' });
                 }
+
+                if (tabId === 'radar') {
+                    document.querySelector('.radar-container').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+        
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('info', 'Social Media', 'Social media link clicked. This would open the respective social media page.');
+            });
+        });
