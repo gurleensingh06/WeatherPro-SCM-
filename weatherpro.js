@@ -532,3 +532,32 @@ const loadingElement = document.getElementById('loading');
                 aqiPollutantsElement.innerHTML += pollutantHTML;
             });
         }
+
+
+
+
+        async function getWeatherForCity(city) {
+            showLoading();
+            
+        
+            const currentData = await fetchCurrentWeather(city);
+            
+            if (currentData) {
+          
+                const forecastData = await fetchForecast(currentData.coord.lat, currentData.coord.lon);
+         
+                const aqiData = await fetchAirQuality(currentData.coord.lat, currentData.coord.lon);
+                
+                updateCurrentWeather(currentData);
+                updateForecast(forecastData);
+                updateAirQuality(aqiData);
+                
+              
+                currentCity = city;
+                
+              
+                showToast('success', 'Weather Updated', `Weather data for ${city} has been updated.`);
+            }
+            
+            hideLoading();
+        }
