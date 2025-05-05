@@ -696,3 +696,10 @@ const loadingElement = document.getElementById('loading');
                 showToast('info', 'Social Media', 'Social media link clicked. This would open the respective social media page.');
             });
         });
+
+        document.querySelectorAll('.footer-link a, .footer-bottom-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('info', 'Navigation', `You clicked: ${link.textContent.trim()}`);
+            });
+        });
