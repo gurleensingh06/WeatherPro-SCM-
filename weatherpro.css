@@ -1,3 +1,4 @@
+
 :root {
     --primary: #2563eb;
     --primary-dark: #1d4ed8;
@@ -547,3 +548,4 @@ body {
     box-shadow: var(--shadow);
     border-color: var(--primary-light);
 }
+
