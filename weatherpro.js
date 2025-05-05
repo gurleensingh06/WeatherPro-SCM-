@@ -485,4 +485,26 @@ const loadingElement = document.getElementById('loading');
                     dailyForecastElement.innerHTML += dailyHTML;
                 }
             }
-    
+            function updateAirQuality(data) {
+                if (!data || !data.list || data.list.length === 0) {
+                    
+                    aqiBadgeElement.style.display = 'none';
+                    return;
+                }
+                
+                const aqi = data.list[0].main.aqi;
+                const components = data.list[0].components;
+                
+             
+                const { level, description, className } = getAQIInfo(aqi);
+                
+              
+                aqiBadgeElement.style.display = 'flex';
+                aqiBadgeElement.className = `aqi-badge ${className}`;
+                aqiSimpleElement.textContent = `AQI: ${aqi}`;
+                
+              
+                aqiValueElement.textContent = aqi;
+                aqiLevelElement.textContent = level;
+                aqiLevelElement.className = `aqi-level ${className}`;
+                aqiDescriptionElement.textContent = description;
