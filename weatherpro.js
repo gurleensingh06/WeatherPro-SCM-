@@ -401,3 +401,110 @@ const loadingElement = document.getElementById('loading');
                 if (!afternoonForecast) afternoonForecast = data.hourly[Math.min(6, data.hourly.length - 1)];
                 if (!eveningForecast) eveningForecast = data.hourly[Math.min(12, data.hourly.length - 1)];
                 if (!nightForecast) nightForecast = data.hourly[Math.min(18, data.hourly.length - 1)];
+
+
+                const periods = [
+                    { name: 'Morning', data: morningForecast },
+                    { name: 'Afternoon', data: afternoonForecast },
+                    { name: 'Evening', data: eveningForecast },
+                    { name: 'Overnight', data: nightForecast }
+                ];
+                
+                periods.forEach(period => {
+                    const isNight = period.name === 'Evening' || period.name === 'Overnight';
+                    const temp = kelvinToCelsius(period.data.temp);
+                    const icon = getWeatherIcon(period.data.weather[0].id, isNight);
+                    const precip = period.data.pop ? `${Math.round(period.data.pop * 100)}%` : '0%';
+                    
+                    const periodHTML = `
+                        <div class="forecast-item">
+                            <div class="forecast-time">${period.name}</div>
+                            <div class="forecast-icon">${icon}</div>
+                            <div class="forecast-temp">${temp}°</div>
+                            <div class="forecast-precip">
+                                <i class="fa-solid fa-droplet"></i> ${precip}
+                            </div>
+                        </div>
+                    `;
+                    
+                    todayForecastElement.innerHTML += periodHTML;
+                });
+
+
+
+                for (let i = 0; i < Math.min(24, data.hourly.length); i++) {
+                    const hour = getHour(data.hourly[i].dt);
+                    const temp = kelvinToCelsius(data.hourly[i].temp);
+                    const isNight = new Date(data.hourly[i].dt * 1000).getHours() >= 18 || new Date(data.hourly[i].dt * 1000).getHours() < 6;
+                    const icon = getWeatherIcon(data.hourly[i].weather[0].id, isNight);
+                    const precip = data.hourly[i].pop ? `${Math.round(data.hourly[i].pop * 100)}%` : '0%';
+                    
+                    const hourlyHTML = `
+                        <div class="hourly-item">
+                            <div class="forecast-time">${hour}</div>
+                            <div class="forecast-icon">${icon}</div>
+                            <div class="forecast-temp">${temp}°</div>
+                            <div class="forecast-precip">
+                                <i class="fa-solid fa-droplet"></i> ${precip}
+                            </div>
+                        </div>
+                    `;
+                    
+                    hourlyForecastElement.innerHTML += hourlyHTML;
+                }
+
+
+                for (let i = 0; i < Math.min(7, data.daily.length); i++) {
+                    const day = i === 0 ? 'Today' : getDayName(data.daily[i].dt);
+                    const icon = getWeatherIcon(data.daily[i].weather[0].id);
+                    const tempMax = kelvinToCelsius(data.daily[i].temp.max);
+                    const tempMin = kelvinToCelsius(data.daily[i].temp.min);
+                    const precip = data.daily[i].pop ? `${Math.round(data.daily[i].pop * 100)}%` : '0%';
+                    
+                    const allTemps = data.daily.map(d => kelvinToCelsius(d.temp.max));
+                    const maxTemp = Math.max(...allTemps);
+                    const minTemp = Math.min(...allTemps.map((_, i) => kelvinToCelsius(data.daily[i].temp.min)));
+                    const range = maxTemp - minTemp;
+                    const barStart = ((tempMin - minTemp) / range) * 100;
+                    const barWidth = ((tempMax - tempMin) / range) * 100;
+                    
+                    const dailyHTML = `
+                        <div class="daily-item">
+                            <div class="daily-day">${day}</div>
+                            <div class="daily-icon">${icon}</div>
+                            <div class="daily-temp">
+                                <span class="temp-low">${tempMin}°</span>
+                                <div class="temp-bar-container">
+                                    <div class="temp-bar" style="margin-left: ${barStart}%; width: ${barWidth}%;"></div>
+                                </div>
+                                <span class="temp-high">${tempMax}°</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    dailyForecastElement.innerHTML += dailyHTML;
+                }
+            }
+            function updateAirQuality(data) {
+                if (!data || !data.list || data.list.length === 0) {
+                    
+                    aqiBadgeElement.style.display = 'none';
+                    return;
+                }
+                
+                const aqi = data.list[0].main.aqi;
+                const components = data.list[0].components;
+                
+             
+                const { level, description, className } = getAQIInfo(aqi);
+                
+              
+                aqiBadgeElement.style.display = 'flex';
+                aqiBadgeElement.className = `aqi-badge ${className}`;
+                aqiSimpleElement.textContent = `AQI: ${aqi}`;
+                
+              
+                aqiValueElement.textContent = aqi;
+                aqiLevelElement.textContent = level;
+                aqiLevelElement.className = `aqi-level ${className}`;
+                aqiDescriptionElement.textContent = description;
