@@ -302,7 +302,102 @@ const loadingElement = document.getElementById('loading');
                 }
             }
             
+
+
+            async function fetchWeatherByCoords(lat, lon) {
+                try {
+                    const response = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+                    if (!response.ok) {
+                        throw new Error('Unable to fetch weather data for your location.');
+                    }
+                    return await response.json();
+                } catch (error) {
+                    showError(error.message);
+                    showToast('error', 'Error', error.message);
+                    return null;
+                }
+            }
     
-    
-    
-    
+
+            function updateCurrentWeather(data) {
+                if (!data) return;
+                
+      
+                locationNameElement.textContent = `${data.name}, ${data.sys.country}`;
+                const localTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                currentTimeElement.textContent = `As of ${localTime} Local Time`;
+                
+                currentTempElement.textContent = `${kelvinToCelsius(data.main.temp)}°`;
+                weatherConditionElement.textContent = data.weather[0].main;
+                
+                tempHighElement.textContent = `${kelvinToCelsius(data.main.temp_max)}°`;
+                tempLowElement.textContent = `${kelvinToCelsius(data.main.temp_min)}°`;
+                
+                const isNight = data.dt > data.sys.sunset || data.dt < data.sys.sunrise;
+                weatherIconElement.innerHTML = getWeatherIcon(data.weather[0].id, isNight);
+                
+                windSpeedElement.textContent = `${Math.round(data.wind.speed * 3.6)} km/h`; // Convert m/s to km/h
+                humidityElement.textContent = `${data.main.humidity}%`;
+                
+                forecastTitleElement.textContent = `${data.name} Forecast`;
+                
+                feelsLikeElement.textContent = `${kelvinToCelsius(data.main.feels_like)}°`;
+                highLowDetailElement.textContent = `${kelvinToCelsius(data.main.temp_max)}°/${kelvinToCelsius(data.main.temp_min)}°`;
+                windElement.textContent = `${Math.round(data.wind.speed * 3.6)} km/h`; // Convert m/s to km/h
+                humidityDetailElement.textContent = `${data.main.humidity}%`;
+                dewPointElement.textContent = `${calculateDewPoint(kelvinToCelsius(data.main.temp), data.main.humidity)}°`;
+                pressureElement.textContent = `${data.main.pressure} hPa`;
+                visibilityElement.textContent = `${(data.visibility / 1000).toFixed(1)} km`;
+                cloudsElement.textContent = `${data.clouds.all}%`;
+                
+                sunriseElement.textContent = formatTime(data.sys.sunrise);
+                sunsetElement.textContent = formatTime(data.sys.sunset);
+                
+                const sunPosition = calculateSunPosition(data.dt, data.sys.sunrise, data.sys.sunset);
+                sunIndicatorElement.style.left = `${sunPosition}%`;
+            }
+            
+            function updateForecast(data) {
+                if (!data) return;
+                
+                const uvIndex = Math.round(data.current.uvi);
+                uvIndexElement.textContent = `${uvIndex} (${getUVIndexDescription(uvIndex)})`;
+                uvIndexSimpleElement.textContent = `UV: ${uvIndex}`;
+                
+                todayForecastElement.innerHTML = '';
+                hourlyForecastElement.innerHTML = '';
+                dailyForecastElement.innerHTML = '';
+                
+                const currentHour = new Date().getHours();
+                
+                const morningHour = 8;
+                const afternoonHour = 14;
+                const eveningHour = 20;
+                const nightHour = 2;
+                
+                let morningForecast = null;
+                let afternoonForecast = null;
+                let eveningForecast = null;
+                let nightForecast = null;
+                
+                for (let i = 0; i < Math.min(24, data.hourly.length); i++) {
+                    const forecastHour = new Date(data.hourly[i].dt * 1000).getHours();
+                    
+                    if (!morningForecast && Math.abs(forecastHour - morningHour) <= 2) {
+                        morningForecast = data.hourly[i];
+                    }
+                    if (!afternoonForecast && Math.abs(forecastHour - afternoonHour) <= 2) {
+                        afternoonForecast = data.hourly[i];
+                    }
+                    if (!eveningForecast && Math.abs(forecastHour - eveningHour) <= 2) {
+                        eveningForecast = data.hourly[i];
+                    }
+                    if (!nightForecast && Math.abs(forecastHour - nightHour) <= 2) {
+                        nightForecast = data.hourly[i];
+                    }
+                }
+                
+                if (!morningForecast) morningForecast = data.hourly[0];
+                if (!afternoonForecast) afternoonForecast = data.hourly[Math.min(6, data.hourly.length - 1)];
+                if (!eveningForecast) eveningForecast = data.hourly[Math.min(12, data.hourly.length - 1)];
+                if (!nightForecast) nightForecast = data.hourly[Math.min(18, data.hourly.length - 1)];
