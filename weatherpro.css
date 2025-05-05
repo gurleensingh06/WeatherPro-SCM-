@@ -1013,3 +1013,30 @@ body {
     color: var(--light);
     margin-bottom: 15px;
 }
+
+.footer-logo i {
+    font-size: 24px;
+    color: var(--primary-light);
+}
+
+.footer-description {
+    color: var(--gray-light);
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-link {
+    margin-bottom: 10px;
+}
+
+.footer-link a {
+    color: var(--gray-light);
+    text-decoration: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
