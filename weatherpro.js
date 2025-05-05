@@ -707,3 +707,15 @@ const loadingElement = document.getElementById('loading');
             document.body.classList.add('dark-mode');
             darkModeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
         }
+
+
+        window.addEventListener('load', () => {
+          
+            getWeatherForCurrentLocation();
+    
+            setTimeout(() => {
+                if (!currentCity) {
+                    getWeatherForCity('New York');
+                }
+            }, 3000);
+        });
