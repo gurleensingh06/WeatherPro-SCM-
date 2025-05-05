@@ -401,3 +401,32 @@ const loadingElement = document.getElementById('loading');
                 if (!afternoonForecast) afternoonForecast = data.hourly[Math.min(6, data.hourly.length - 1)];
                 if (!eveningForecast) eveningForecast = data.hourly[Math.min(12, data.hourly.length - 1)];
                 if (!nightForecast) nightForecast = data.hourly[Math.min(18, data.hourly.length - 1)];
+
+
+                const periods = [
+                    { name: 'Morning', data: morningForecast },
+                    { name: 'Afternoon', data: afternoonForecast },
+                    { name: 'Evening', data: eveningForecast },
+                    { name: 'Overnight', data: nightForecast }
+                ];
+                
+                periods.forEach(period => {
+                    const isNight = period.name === 'Evening' || period.name === 'Overnight';
+                    const temp = kelvinToCelsius(period.data.temp);
+                    const icon = getWeatherIcon(period.data.weather[0].id, isNight);
+                    const precip = period.data.pop ? `${Math.round(period.data.pop * 100)}%` : '0%';
+                    
+                    const periodHTML = `
+                        <div class="forecast-item">
+                            <div class="forecast-time">${period.name}</div>
+                            <div class="forecast-icon">${icon}</div>
+                            <div class="forecast-temp">${temp}°</div>
+                            <div class="forecast-precip">
+                                <i class="fa-solid fa-droplet"></i> ${precip}
+                            </div>
+                        </div>
+                    `;
+                    
+                    todayForecastElement.innerHTML += periodHTML;
+                });
+    
