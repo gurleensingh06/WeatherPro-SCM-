@@ -54,3 +54,255 @@ const loadingElement = document.getElementById('loading');
         let forecastData = null;
         let aqiData = null;
         let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+        function kelvinToCelsius(kelvin) {
+                return Math.round(kelvin - 273.15);
+        }
+
+        function formatTime(timestamp, timezone = 0) {
+                const date = new Date(timestamp * 1000);
+                const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+                return date.toLocaleTimeString([], options);
+            }
+    
+
+            function formatDate(timestamp, timezone = 0) {
+                const date = new Date(timestamp * 1000);
+                return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+            }
+            
+            function getDayName(timestamp, timezone = 0) {
+                const date = new Date(timestamp * 1000);
+                return date.toLocaleDateString('en-US', { weekday: 'long' });
+            }
+    
+
+            function getHour(timestamp, timezone = 0) {
+                const date = new Date(timestamp * 1000);
+                return date.toLocaleTimeString([], { hour: '2-digit', hour12: true });
+            }
+    
+
+            function getWeatherIcon(code, isNight = false) {
+
+                if (code >= 200 && code < 300) {
+                    return '<i class="fa-solid fa-cloud-bolt"></i>'; 
+                } else if (code >= 300 && code < 400) {
+                    return '<i class="fa-solid fa-cloud-rain"></i>'; 
+                } else if (code >= 500 && code < 600) {
+                    return '<i class="fa-solid fa-cloud-showers-heavy"></i>'; 
+                } else if (code >= 600 && code < 700) {
+                    return '<i class="fa-solid fa-snowflake"></i>'; 
+                } else if (code >= 700 && code < 800) {
+                    return '<i class="fa-solid fa-smog"></i>'; 
+                } else if (code === 800) {
+                    return isNight ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+                } else if (code === 801) {
+                    return isNight ? '<i class="fa-solid fa-cloud-moon"></i>' : '<i class="fa-solid fa-cloud-sun"></i>'; 
+                } else {
+                    return '<i class="fa-solid fa-cloud"></i>'; 
+                }
+            }
+    
+            function calculateDewPoint(temp, humidity) {
+
+                const a = 17.27;
+                const b = 237.7;
+                const alpha = ((a * temp) / (b + temp)) + Math.log(humidity / 100);
+                return Math.round((b * alpha) / (a - alpha));
+            }
+
+
+            function calculateSunPosition(currentTime, sunrise, sunset) {
+                const current = new Date(currentTime * 1000).getTime();
+                const sunriseTime = new Date(sunrise * 1000).getTime();
+                const sunsetTime = new Date(sunset * 1000).getTime();
+                
+                if (current < sunriseTime) return 0;
+                if (current > sunsetTime) return 100;
+                
+                const totalDayTime = sunsetTime - sunriseTime;
+                const timeSinceSunrise = current - sunriseTime;
+                return Math.round((timeSinceSunrise / totalDayTime) * 100);
+            }
+
+
+            function getUVIndexDescription(uvIndex) {
+                if (uvIndex <= 2) return 'Low';
+                if (uvIndex <= 5) return 'Moderate';
+                if (uvIndex <= 7) return 'High';
+                if (uvIndex <= 10) return 'Very High';
+                return 'Extreme';
+            }
+
+
+
+            function getAQIInfo(aqiValue) {
+                let level, description, className;
+                
+                switch (aqiValue) {
+                    case 1:
+                        level = 'Good';
+                        description = 'Air quality is considered satisfactory, and air pollution poses little or no risk.';
+                        className = 'good';
+                        break;
+                    case 2:
+                        level = 'Moderate';
+                        description = 'Air quality is acceptable; however, some pollutants may be a concern for a small number of people.';
+                        className = 'moderate';
+                        break;
+                    case 3:
+                        level = 'Unhealthy for Sensitive Groups';
+                        description = 'Members of sensitive groups may experience health effects. The general public is not likely to be affected.';
+                        className = 'unhealthy-sensitive';
+                        break;
+                    case 4:
+                        level = 'Unhealthy';
+                        description = 'Everyone may begin to experience health effects; members of sensitive groups may experience more serious effects.';
+                        className = 'unhealthy';
+                        break;
+                    case 5:
+                        level = 'Very Unhealthy';
+                        description = 'Health warnings of emergency conditions. The entire population is more likely to be affected.';
+                        className = 'very-unhealthy';
+                        break;
+                    default:
+                        level = 'Hazardous';
+                        description = 'Health alert: everyone may experience more serious health effects.';
+                        className = 'hazardous';
+                }
+                
+                return { level, description, className };
+            }
+            
+        
+            function showLoading() {
+                loadingElement.style.display = 'flex';
+            }
+            
+           
+            function hideLoading() {
+                loadingElement.style.display = 'none';
+            }
+            
+     
+            function showError(message) {
+                errorTextElement.textContent = message;
+                errorElement.style.display = 'flex';
+                setTimeout(() => {
+                    errorElement.style.display = 'none';
+                }, 5000);
+            }
+            
+          
+            function showToast(type, title, message) {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                
+                let icon = '';
+                switch (type) {
+                    case 'success':
+                        icon = '<i class="fa-solid fa-circle-check toast-icon"></i>';
+                        break;
+                    case 'error':
+                        icon = '<i class="fa-solid fa-circle-exclamation toast-icon"></i>';
+                        break;
+                    case 'info':
+                        icon = '<i class="fa-solid fa-circle-info toast-icon"></i>';
+                        break;
+                    case 'warning':
+                        icon = '<i class="fa-solid fa-triangle-exclamation toast-icon"></i>';
+                        break;
+                }
+                
+                toast.innerHTML = `
+                    ${icon}
+                    <div class="toast-content">
+                        <div class="toast-title">${title}</div>
+                        <div>${message}</div>
+                    </div>
+                    <div class="toast-close"><i class="fa-solid fa-xmark"></i></div>
+                `;
+                
+                toastContainer.appendChild(toast);
+                
+      
+                toast.querySelector('.toast-close').addEventListener('click', () => {
+                    toast.style.animation = 'slideOutRight 0.3s ease-in-out forwards';
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 300);
+                });
+                
+            
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.style.animation = 'slideOutRight 0.3s ease-in-out forwards';
+                        setTimeout(() => {
+                            if (toast.parentNode) {
+                                toast.remove();
+                            }
+                        }, 300);
+                    }
+                }, 5000);
+            }
+            
+    
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark-mode');
+                isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+       
+                darkModeToggle.innerHTML = isDarkMode ? 
+                    '<i class="fa-solid fa-sun"></i>' : 
+                    '<i class="fa-solid fa-moon"></i>';
+            }
+            
+        
+            async function fetchCurrentWeather(city) {
+                try {
+                    const response = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}`);
+                    if (!response.ok) {
+                        throw new Error('City not found. Please try another location.');
+                    }
+                    return await response.json();
+                } catch (error) {
+                    showError(error.message);
+                    showToast('error', 'Error', error.message);
+                    return null;
+                }
+            }
+            
+    
+            async function fetchForecast(lat, lon) {
+                try {
+                    const response = await fetch(`${BASE_URL}/onecall?lat=${lat}&lon=${lon}&exclude=minutely&appid=${API_KEY}`);
+                    if (!response.ok) {
+                        throw new Error('Unable to fetch forecast data.');
+                    }
+                    return await response.json();
+                } catch (error) {
+                    showError(error.message);
+                    showToast('error', 'Error', error.message);
+                    return null;
+                }
+            }
+            
+      
+            async function fetchAirQuality(lat, lon) {
+                try {
+                    const response = await fetch(`${AQI_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+                    if (!response.ok) {
+                        throw new Error('Unable to fetch air quality data.');
+                    }
+                    return await response.json();
+                } catch (error) {
+                    console.error('Air quality error:', error);
+                    return null;
+                }
+            }
+            
+    
+    
+    
+    
