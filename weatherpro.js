@@ -604,3 +604,24 @@ const loadingElement = document.getElementById('loading');
                 showToast('error', 'Browser Error', 'Geolocation is not supported by your browser.');
             }
         }
+
+
+        searchButton.addEventListener('click', () => {
+            const city = searchInput.value.trim();
+            if (city) {
+                getWeatherForCity(city);
+            }
+        });
+     
+        searchInput.addEventListener('keyup', (event) => {
+            if (event.key === 'Enter') {
+                const city = searchInput.value.trim();
+                if (city) {
+                    getWeatherForCity(city);
+                }
+            }
+        });
+       
+        getLocationButton.addEventListener('click', () => {
+            getWeatherForCurrentLocation();
+        });
