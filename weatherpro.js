@@ -508,3 +508,99 @@ const loadingElement = document.getElementById('loading');
                 aqiLevelElement.textContent = level;
                 aqiLevelElement.className = `aqi-level ${className}`;
                 aqiDescriptionElement.textContent = description;
+
+
+                aqiPollutantsElement.innerHTML = '';
+            
+            const pollutants = [
+                { name: 'PM2.5', value: components.pm2_5, unit: 'μg/m³' },
+                { name: 'PM10', value: components.pm10, unit: 'μg/m³' },
+                { name: 'O3 (Ozone)', value: components.o3, unit: 'μg/m³' },
+                { name: 'NO2', value: components.no2, unit: 'μg/m³' },
+                { name: 'SO2', value: components.so2, unit: 'μg/m³' },
+                { name: 'CO', value: components.co, unit: 'mg/m³' }
+            ];
+            
+            pollutants.forEach(pollutant => {
+                const pollutantHTML = `
+                    <div class="pollutant-item">
+                        <div class="pollutant-name">${pollutant.name}</div>
+                        <div class="pollutant-value">${pollutant.value.toFixed(1)}<span class="pollutant-unit">${pollutant.unit}</span></div>
+                    </div>
+                `;
+                
+                aqiPollutantsElement.innerHTML += pollutantHTML;
+            });
+        }
+
+
+
+
+        async function getWeatherForCity(city) {
+            showLoading();
+            
+        
+            const currentData = await fetchCurrentWeather(city);
+            
+            if (currentData) {
+          
+                const forecastData = await fetchForecast(currentData.coord.lat, currentData.coord.lon);
+         
+                const aqiData = await fetchAirQuality(currentData.coord.lat, currentData.coord.lon);
+                
+                updateCurrentWeather(currentData);
+                updateForecast(forecastData);
+                updateAirQuality(aqiData);
+                
+              
+                currentCity = city;
+                
+              
+                showToast('success', 'Weather Updated', `Weather data for ${city} has been updated.`);
+            }
+            
+            hideLoading();
+        }
+
+
+         async function getWeatherForCurrentLocation() {
+            if (navigator.geolocation) {
+                showLoading();
+                
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    
+               
+                    const currentData = await fetchWeatherByCoords(lat, lon);
+                    
+                    if (currentData) {
+                     
+                        const forecastData = await fetchForecast(lat, lon);
+                        
+                   
+                        const aqiData = await fetchAirQuality(lat, lon);
+                        
+                
+                        updateCurrentWeather(currentData);
+                        updateForecast(forecastData);
+                        updateAirQuality(aqiData);
+                        
+                     
+                        currentCity = currentData.name;
+                        
+                      
+                        showToast('success', 'Location Found', `Weather data for your location (${currentData.name}) has been updated.`);
+                    }
+                    
+                    hideLoading();
+                }, (error) => {
+                    hideLoading();
+                    showError('Unable to get your location. Please allow location access or search for a city.');
+                    showToast('error', 'Location Error', 'Unable to get your location. Please allow location access or search for a city.');
+                });
+            } else {
+                showError('Geolocation is not supported by your browser.');
+                showToast('error', 'Browser Error', 'Geolocation is not supported by your browser.');
+            }
+        }
