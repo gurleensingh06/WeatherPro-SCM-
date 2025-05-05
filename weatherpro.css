@@ -1115,3 +1115,34 @@ body {
 .footer-bottom-link:hover {
     color: var(--primary-light);
 }
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(248, 250, 252, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    transition: var(--transition);
+}
+
+.dark-mode .loading {
+    background-color: rgba(15, 23, 42, 0.8);
+}
+
+.skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--light-dark) 25%,
+        var(--light) 50%,
+        var(--light-dark) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
