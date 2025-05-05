@@ -10,3 +10,194 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="F:\D\vs code\html\flip timer\weather.css">
 </head>
+<body>
+
+    <div class="toast-container" id="toast-container"></div>
+
+    <header class="header">
+        <a href="#" class="logo">
+            <i class="fa-solid fa-cloud-sun"></i>
+            <span>WeatherPro</span>
+        </a>
+        <div class="search-container">
+            <i class="fa-solid fa-location-dot location-icon" id="get-location" title="Use current location"></i>
+            <input type="text" class="search-input" id="search-input" placeholder="Search for a city...">
+            <i class="fa-solid fa-search search-icon" id="search-button"></i>
+        </div>
+        <div class="header-actions">
+            <button class="action-button" id="dark-mode-toggle" title="Toggle dark mode">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="action-button" title="Settings">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+            <section class="current-weather" id="current-weather">
+                <div class="location">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span id="location-name">Loading...</span>
+                </div>
+                <div class="time" id="current-time">As of --:-- Local Time</div>
+                <div class="weather-display">
+                    <div class="temperature-container">
+                        <div class="temperature" id="current-temp">--°</div>
+                        <div class="weather-condition" id="weather-condition">--</div>
+                        <div class="high-low">
+                            <span><i class="fa-solid fa-arrow-up"></i> <span id="temp-high">--°</span></span>
+                            <span><i class="fa-solid fa-arrow-down"></i> <span id="temp-low">--°</span></span>
+                        </div>
+                    </div>
+                    <div class="weather-icon" id="weather-icon">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                </div>
+                <div class="weather-extras">
+                    <div class="weather-extra">
+                        <i class="fa-solid fa-wind"></i>
+                        <span id="wind-speed">-- km/h</span>
+                    </div>
+                    <div class="weather-extra">
+                        <i class="fa-solid fa-droplet"></i>
+                        <span id="humidity">--%</span>
+                    </div>
+                    <div class="weather-extra">
+                        <i class="fa-solid fa-sun"></i>
+                        <span id="uv-index-simple">--</span>
+                    </div>
+                    <div class="aqi-badge" id="aqi-badge">
+                        <i class="fa-solid fa-lungs"></i>
+                        <span id="aqi-simple">AQI: --</span>
+                    </div>
+                </div>
+
+
+
+            </section>
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title" id="forecast-title">Weather Forecast</h2>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="today">
+                        <i class="fa-solid fa-calendar-day"></i> Today
+                    </div>
+                    <div class="tab" data-tab="hourly">
+                        <i class="fa-regular fa-clock"></i> Hourly
+                    </div>
+                    <div class="tab" data-tab="daily">
+                        <i class="fa-regular fa-calendar"></i> Daily
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    <div class="tab-content active" id="today">
+                        <div class="forecast-grid" id="today-forecast">
+                            <!-- Today forecast items will be inserted here -->
+                            <div class="forecast-item">
+                                <div class="forecast-time">Morning</div>
+                                <div class="forecast-icon">
+                                    <i class="fa-solid fa-cloud"></i>
+                                </div>
+                                <div class="forecast-temp">--°</div>
+                                <div class="forecast-precip">
+                                    <i class="fa-solid fa-droplet"></i> --%
+                                </div>
+                            </div>
+                            <div class="forecast-item">
+                                <div class="forecast-time">Afternoon</div>
+                                <div class="forecast-icon">
+                                    <i class="fa-solid fa-cloud"></i>
+                                </div>
+                                <div class="forecast-temp">--°</div>
+                                <div class="forecast-precip">
+                                    <i class="fa-solid fa-droplet"></i> --%
+                                </div>
+                            </div>
+                            <div class="forecast-item">
+                                <div class="forecast-time">Evening</div>
+                                <div class="forecast-icon">
+                                    <i class="fa-solid fa-cloud"></i>
+                                </div>
+                                <div class="forecast-temp">--°</div>
+                                <div class="forecast-precip">
+                                    <i class="fa-solid fa-droplet"></i> --%
+                                </div>
+                            </div>
+                            <div class="forecast-item">
+                                <div class="forecast-time">Overnight</div>
+                                <div class="forecast-icon">
+                                    <i class="fa-solid fa-cloud"></i>
+                                </div>
+                                <div class="forecast-temp">--°</div>
+                                <div class="forecast-precip">
+                                    <i class="fa-solid fa-droplet"></i> --%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="hourly">
+                        <div class="hourly-scroll" id="hourly-forecast">
+                            <!-- Hourly forecast items will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="daily">
+                        <div id="daily-forecast">
+                            <!-- Daily forecast items will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Air Quality Section -->
+            <section class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Air Quality</h2>
+                </div>
+                
+                <div class="card-body">
+                    <div class="aqi-section">
+                        <div class="aqi-container">
+                            <div class="aqi-display">
+                                <div class="aqi-value" id="aqi-value">--</div>
+                                <div class="aqi-info">
+                                    <div class="aqi-level" id="aqi-level">--</div>
+                                    <div class="aqi-description" id="aqi-description">--</div>
+                                </div>
+                            </div>
+                            
+                            <div class="aqi-scale">
+                                <div class="aqi-scale-segment"></div>
+                                <div class="aqi-scale-segment"></div>
+                                <div class="aqi-scale-segment"></div>
+                                <div class="aqi-scale-segment"></div>
+                                <div class="aqi-scale-segment"></div>
+                                <div class="aqi-scale-segment"></div>
+                            </div>
+                            
+                            <div class="aqi-legend">
+                                <span>Good</span>
+                                <span>Moderate</span>
+                                <span>Unhealthy for Sensitive</span>
+                                <span>Unhealthy</span>
+                                <span>Very Unhealthy</span>
+                                <span>Hazardous</span>
+                            </div>
+                            
+                            <div class="aqi-pollutants" id="aqi-pollutants">
+                                <!-- Pollutant items will be inserted here -->
+                                <div class="pollutant-item">
+                                    <div class="pollutant-name">PM2.5</div>
+                                    <div class="pollutant-value">--<span class="pollutant-unit">μg/m³</span></div>
+                                </div>
+                                <div class="pollutant-item">
+                                    <div class="pollutant-name">PM10</div>
+                                    <div class="pollutant-value">--<span class="pollutant-unit">μg/m³</span></div>
+                                </div>
+
