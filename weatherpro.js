@@ -625,3 +625,29 @@ const loadingElement = document.getElementById('loading');
         getLocationButton.addEventListener('click', () => {
             getWeatherForCurrentLocation();
         });
+
+
+
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+        
+   
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+             
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+              
+                tab.classList.add('active');
+                
+           
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+              
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
