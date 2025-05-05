@@ -452,3 +452,17 @@ const loadingElement = document.getElementById('loading');
                     
                     hourlyForecastElement.innerHTML += hourlyHTML;
                 }
+
+
+                for (let i = 0; i < Math.min(7, data.daily.length); i++) {
+                    const day = i === 0 ? 'Today' : getDayName(data.daily[i].dt);
+                    const icon = getWeatherIcon(data.daily[i].weather[0].id);
+                    const tempMax = kelvinToCelsius(data.daily[i].temp.max);
+                    const tempMin = kelvinToCelsius(data.daily[i].temp.min);
+                    const precip = data.daily[i].pop ? `${Math.round(data.daily[i].pop * 100)}%` : '0%';
+                    
+                    const allTemps = data.daily.map(d => kelvinToCelsius(d.temp.max));
+                    const maxTemp = Math.max(...allTemps);
+                    const minTemp = Math.min(...allTemps.map((_, i) => kelvinToCelsius(data.daily[i].temp.min)));
+                    const range = maxTemp - minTemp;
+    
