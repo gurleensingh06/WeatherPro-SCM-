@@ -561,3 +561,46 @@ const loadingElement = document.getElementById('loading');
             
             hideLoading();
         }
+
+
+         async function getWeatherForCurrentLocation() {
+            if (navigator.geolocation) {
+                showLoading();
+                
+                navigator.geolocation.getCurrentPosition(async (position) => {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    
+               
+                    const currentData = await fetchWeatherByCoords(lat, lon);
+                    
+                    if (currentData) {
+                     
+                        const forecastData = await fetchForecast(lat, lon);
+                        
+                   
+                        const aqiData = await fetchAirQuality(lat, lon);
+                        
+                
+                        updateCurrentWeather(currentData);
+                        updateForecast(forecastData);
+                        updateAirQuality(aqiData);
+                        
+                     
+                        currentCity = currentData.name;
+                        
+                      
+                        showToast('success', 'Location Found', `Weather data for your location (${currentData.name}) has been updated.`);
+                    }
+                    
+                    hideLoading();
+                }, (error) => {
+                    hideLoading();
+                    showError('Unable to get your location. Please allow location access or search for a city.');
+                    showToast('error', 'Location Error', 'Unable to get your location. Please allow location access or search for a city.');
+                });
+            } else {
+                showError('Geolocation is not supported by your browser.');
+                showToast('error', 'Browser Error', 'Geolocation is not supported by your browser.');
+            }
+        }
