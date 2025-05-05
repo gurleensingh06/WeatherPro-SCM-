@@ -651,3 +651,35 @@ const loadingElement = document.getElementById('loading');
                 document.getElementById(tabId).classList.add('active');
             });
         });
+
+
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+    
+                document.querySelectorAll('.nav-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+          
+                item.classList.add('active');
+           
+                const tabId = item.getAttribute('data-tab');
+           
+                if (tabId === 'today' || tabId === 'hourly' || tabId === 'daily') {
+                  
+                    document.querySelectorAll('.tab').forEach(t => {
+                        t.classList.remove('active');
+                        if (t.getAttribute('data-tab') === tabId) {
+                            t.classList.add('active');
+                        }
+                    });
+                    
+               
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId).classList.add('active');
+            
+                    document.querySelector('.card').scrollIntoView({ behavior: 'smooth' });
+                }
