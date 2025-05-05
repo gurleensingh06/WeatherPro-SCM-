@@ -397,3 +397,153 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid var(--light-dark);
+    background-color: var(--light);
+    position: sticky;
+    top: 72px;
+    z-index: 10;
+}
+
+.tab {
+    padding: 15px 25px;
+    cursor: pointer;
+    position: relative;
+    font-weight: 500;
+    color: var(--gray);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab i {
+    font-size: 16px;
+}
+
+.tab:hover {
+    color: var(--primary);
+}
+
+.tab.active {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 3px 3px 0 0;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Today forecast */
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.forecast-item {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--light-dark);
+}
+
+.forecast-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-light);
+}
+
+.forecast-time {
+    color: var(--gray);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.forecast-temp {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 15px 0;
+    color: var(--dark);
+}
+
+.forecast-icon {
+    font-size: 36px;
+    margin: 15px 0;
+    color: var(--secondary);
+}
+
+.forecast-precip {
+    font-size: 14px;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.forecast-precip i {
+    color: var(--info);
+}
+
+/* Hourly forecast */
+.hourly-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding: 15px 0;
+    gap: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray) var(--light-dark);
+}
+
+.hourly-item {
+    min-width: 100px;
+    text-align: center;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    background-color: var(--light);
+    border: 1px solid var(--light-dark);
+    transition: var(--transition);
+}
+
+.hourly-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary-light);
+}
