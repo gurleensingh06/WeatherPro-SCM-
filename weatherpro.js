@@ -429,4 +429,26 @@ const loadingElement = document.getElementById('loading');
                     
                     todayForecastElement.innerHTML += periodHTML;
                 });
-    
+
+
+
+                for (let i = 0; i < Math.min(24, data.hourly.length); i++) {
+                    const hour = getHour(data.hourly[i].dt);
+                    const temp = kelvinToCelsius(data.hourly[i].temp);
+                    const isNight = new Date(data.hourly[i].dt * 1000).getHours() >= 18 || new Date(data.hourly[i].dt * 1000).getHours() < 6;
+                    const icon = getWeatherIcon(data.hourly[i].weather[0].id, isNight);
+                    const precip = data.hourly[i].pop ? `${Math.round(data.hourly[i].pop * 100)}%` : '0%';
+                    
+                    const hourlyHTML = `
+                        <div class="hourly-item">
+                            <div class="forecast-time">${hour}</div>
+                            <div class="forecast-icon">${icon}</div>
+                            <div class="forecast-temp">${temp}°</div>
+                            <div class="forecast-precip">
+                                <i class="fa-solid fa-droplet"></i> ${precip}
+                            </div>
+                        </div>
+                    `;
+                    
+                    hourlyForecastElement.innerHTML += hourlyHTML;
+                }
