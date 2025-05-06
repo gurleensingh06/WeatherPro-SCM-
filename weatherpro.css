@@ -112,11 +112,9 @@ body {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
-
 .search-input::placeholder {
     color: var(--gray);
 }
-
 .search-icon {
     position: absolute;
     right: 18px;
@@ -127,11 +125,9 @@ body {
     font-size: 18px;
     transition: var(--transition);
 }
-
 .search-icon:hover {
     color: var(--primary-dark);
 }
-
 .location-icon {
     position: absolute;
     left: 18px;
@@ -142,17 +138,14 @@ body {
     font-size: 18px;
     transition: var(--transition);
 }
-
 .location-icon:hover {
     color: var(--primary);
 }
-
 .header-actions {
     display: flex;
     align-items: center;
     gap: 16px;
 }
-
 .action-button {
     background: none;
     border: none;
@@ -166,12 +159,10 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 .action-button:hover {
     color: var(--primary);
     background-color: var(--light-dark);
 }
-
 .main-content {
     flex: 1;
     padding-bottom: 80px;
@@ -204,7 +195,6 @@ body {
     background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDEzNSkiPjxyZWN0IGlkPSJwYXR0ZXJuLWJhY2tncm91bmQiIHdpZHRoPSI0MDAlIiBoZWlnaHQ9IjQwMCUiIGZpbGw9InRyYW5zcGFyZW50Ij48L3JlY3Q+IDxjaXJjbGUgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgY3g9IjIwIiBjeT0iMjAiIHI9IjEiPjwvY2lyY2xlPjxjaXJjbGUgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIgY3g9IjAiIGN5PSIwIiByPSIxIj48L2NpcmNsZT48L3BhdHRlcm4+PC9kZWZzPiA8cmVjdCBmaWxsPSJ1cmwoI3BhdHRlcm4pIiBoZWlnaHQ9IjEwMCUiIHdpZHRoPSIxMDAlIj48L3JlY3Q+PC9zdmc+');
     opacity: 0.5;
 }
-
 .location {
     font-size: 24px;
     font-weight: 600;
@@ -214,11 +204,9 @@ body {
     gap: 10px;
     position: relative;
 }
-
 .location i {
     font-size: 20px;
 }
-
 .time {
     font-size: 14px;
     font-weight: 400;
@@ -226,62 +214,52 @@ body {
     margin-bottom: 25px;
     position: relative;
 }
-
 .weather-display {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
 }
-
 .temperature-container {
     display: flex;
     flex-direction: column;
 }
-
 .temperature {
     font-size: 90px;
     font-weight: 300;
     line-height: 1;
     margin-bottom: 10px;
 }
-
 .weather-condition {
     font-size: 24px;
     margin-bottom: 10px;
     font-weight: 500;
 }
-
 .high-low {
     font-size: 16px;
     display: flex;
     align-items: center;
     gap: 15px;
 }
-
 .high-low span {
     display: flex;
     align-items: center;
     gap: 5px;
 }
-
 .high-low i {
     font-size: 14px;
 }
-
 .weather-icon {
     font-size: 100px;
     margin-right: 20px;
     text-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     animation: float 3s ease-in-out infinite;
 }
-
 @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0px); }
 }
-
 .weather-extras {
     display: flex;
     gap: 20px;
