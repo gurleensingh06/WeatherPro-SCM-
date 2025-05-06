@@ -277,11 +277,9 @@ body {
     border-radius: 50px;
     backdrop-filter: blur(5px);
 }
-
 .weather-extra i {
     font-size: 16px;
 }
-
 .aqi-badge {
     display: flex;
     align-items: center;
@@ -293,7 +291,6 @@ body {
     position: relative;
     overflow: hidden;
 }
-
 .aqi-badge::before {
     content: '';
     position: absolute;
@@ -304,42 +301,34 @@ body {
     border-radius: 50px;
     opacity: 0.6;
 }
-
 .aqi-badge.good::before {
     background-color: #10b981;
     width: 100%;
 }
-
 .aqi-badge.moderate::before {
     background-color: #f59e0b;
     width: 100%;
 }
-
 .aqi-badge.unhealthy-sensitive::before {
     background-color: #f97316;
     width: 100%;
 }
-
 .aqi-badge.unhealthy::before {
     background-color: #ef4444;
     width: 100%;
 }
-
 .aqi-badge.very-unhealthy::before {
     background-color: #8b5cf6;
     width: 100%;
 }
-
 .aqi-badge.hazardous::before {
     background-color: #7f1d1d;
     width: 100%;
 }
-
 .aqi-badge i, .aqi-badge span {
     position: relative;
     z-index: 1;
 }
-
 .card {
     background: var(--light);
     border-radius: var(--border-radius);
@@ -348,7 +337,6 @@ body {
     overflow: hidden;
     transition: var(--transition);
 }
-
 .card-header {
     padding: 20px 25px;
     border-bottom: 1px solid var(--light-dark);
@@ -361,11 +349,9 @@ body {
     font-weight: 600;
     color: var(--dark);
 }
-
 .card-body {
     padding: 25px;
 }
-
 .tabs {
     display: flex;
     border-bottom: 1px solid var(--light-dark);
@@ -374,7 +360,6 @@ body {
     top: 72px;
     z-index: 10;
 }
-
 .tab {
     padding: 15px 25px;
     cursor: pointer;
@@ -386,20 +371,16 @@ body {
     align-items: center;
     gap: 8px;
 }
-
 .tab i {
     font-size: 16px;
 }
-
 .tab:hover {
     color: var(--primary);
 }
-
 .tab.active {
     color: var(--primary);
     font-weight: 600;
 }
-
 .tab.active::after {
     content: '';
     position: absolute;
@@ -410,16 +391,13 @@ body {
     background-color: var(--primary);
     border-radius: 3px 3px 0 0;
 }
-
 .tab-content {
     display: none;
     animation: fadeIn 0.4s ease-in-out;
 }
-
 .tab-content.active {
     display: block;
 }
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
