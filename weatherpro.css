@@ -1269,3 +1269,166 @@ body {
 .dark-mode .dark-mode-toggle::after {
     transform: translateX(24px);
 }
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .forecast-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .aqi-pollutants {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .weather-display {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .weather-icon {
+        align-self: center;
+        margin: 20px 0;
+    }
+    
+    .temperature {
+        font-size: 70px;
+    }
+    
+    .weather-extras {
+        flex-wrap: wrap;
+    }
+    
+    .sun-times {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .sun-progress-container {
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .tab {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    .daily-day {
+        width: 80px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .footer-bottom-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .header {
+        padding: 12px;
+    }
+    
+    .search-container {
+        margin: 0 10px;
+    }
+    
+    .logo span {
+        display: none;
+    }
+    
+    .container {
+        padding: 0 12px;
+    }
+    
+    .current-weather {
+        padding: 20px;
+        margin: 12px 0;
+    }
+    
+    .location {
+        font-size: 20px;
+    }
+    
+    .card-header, .card-body {
+        padding: 15px;
+    }
+    
+    .forecast-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .forecast-item {
+        padding: 15px;
+    }
+    
+    .daily-icon {
+        display: none;
+    }
+    
+    .daily-day {
+        width: 70px;
+        font-size: 14px;
+    }
+    
+    .temp-bar-container {
+        margin: 0 10px;
+    }
+    
+    .temp-low, .temp-high {
+        width: 30px;
+        font-size: 14px;
+    }
+    
+    .aqi-pollutants {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+.social-login-icons {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+.social-login-icons svg {
+width: 40px;
+}
+
+.social-icon-1,
+.social-icon-1-1,
+.social-icon-2,
+.social-icon-2-2,
+.social-icon-3,
+.social-icon-3-3,
+.social-icon-4,
+.social-icon-4-4 {
+width: 50px;
+height: 50px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50px;
+margin: 20px 0 0px 0;
+}
+
+.icon svg {
+fill: #111;
+}
