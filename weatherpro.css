@@ -445,11 +445,9 @@ body {
     justify-content: center;
     gap: 5px;
 }
-
 .forecast-precip i {
     color: var(--info);
 }
-
 .hourly-scroll {
     display: flex;
     overflow-x: auto;
@@ -458,7 +456,6 @@ body {
     scrollbar-width: thin;
     scrollbar-color: var(--gray) var(--light-dark);
 }
-
 .hourly-item {
     min-width: 100px;
     text-align: center;
@@ -468,7 +465,6 @@ body {
     border: 1px solid var(--light-dark);
     transition: var(--transition);
 }
-
 .hourly-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow);
@@ -484,32 +480,27 @@ body {
     border: 1px solid var(--light-dark);
     transition: var(--transition);
 }
-
 .daily-item:hover {
     transform: translateX(5px);
     box-shadow: var(--shadow);
     border-color: var(--primary-light);
 }
-
 .daily-day {
     width: 120px;
     font-weight: 600;
     color: var(--dark);
 }
-
 .daily-icon {
     font-size: 30px;
     color: var(--secondary);
     width: 60px;
     text-align: center;
 }
-
 .daily-temp {
     flex: 1;
     display: flex;
     align-items: center;
 }
-
 .temp-bar-container {
     flex: 1;
     height: 8px;
@@ -519,7 +510,6 @@ body {
     position: relative;
     overflow: hidden;
 }
-
 .temp-bar {
     height: 100%;
     background: linear-gradient(to right, var(--info), var(--secondary));
