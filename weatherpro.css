@@ -22,7 +22,6 @@
     --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     --transition: all 0.3s ease;
 }
-
 .dark-mode {
     --primary: #3b82f6;
     --primary-dark: #2563eb;
@@ -36,14 +35,12 @@
     --gray: #94a3b8;
     --gray-light: #64748b;
 }
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
 body {
     background-color: var(--light);
     color: var(--dark);
@@ -53,26 +50,21 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
-
 ::-webkit-scrollbar-track {
     background: var(--light-dark);
     border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb {
     background: var(--gray);
     border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
     background: var(--gray-light);
 }
-
 .header {
     background-color: var(--light);
     color: var(--dark);
@@ -86,7 +78,6 @@ body {
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
 }
-
 .logo {
     font-weight: 700;
     font-size: 22px;
@@ -96,18 +87,15 @@ body {
     align-items: center;
     gap: 8px;
 }
-
 .logo i {
     font-size: 24px;
 }
-
 .search-container {
     flex: 1;
     max-width: 600px;
     margin: 0 20px;
     position: relative;
 }
-
 .search-input {
     width: 100%;
     padding: 12px 45px;
@@ -119,7 +107,6 @@ body {
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
 }
-
 .search-input:focus {
     outline: none;
     border-color: var(--primary);
