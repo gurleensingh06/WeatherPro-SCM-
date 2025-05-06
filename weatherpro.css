@@ -402,13 +402,11 @@ body {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
 .forecast-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
-
 .forecast-item {
     background-color: var(--light);
     border-radius: var(--border-radius);
@@ -417,33 +415,28 @@ body {
     transition: var(--transition);
     border: 1px solid var(--light-dark);
 }
-
 .forecast-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-md);
     border-color: var(--primary-light);
 }
-
 .forecast-time {
     color: var(--gray);
     font-size: 14px;
     font-weight: 500;
     margin-bottom: 10px;
 }
-
 .forecast-temp {
     font-size: 28px;
     font-weight: 600;
     margin: 15px 0;
     color: var(--dark);
 }
-
 .forecast-icon {
     font-size: 36px;
     margin: 15px 0;
     color: var(--secondary);
 }
-
 .forecast-precip {
     font-size: 14px;
     color: var(--gray);
