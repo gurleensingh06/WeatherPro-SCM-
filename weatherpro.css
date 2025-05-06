@@ -653,54 +653,43 @@ body {
     align-items: center;
     gap: 20px;
 }
-
 .aqi-value {
     font-size: 64px;
     font-weight: 300;
     color: var(--dark);
     line-height: 1;
 }
-
 .aqi-info {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-
 .aqi-level {
     font-size: 24px;
     font-weight: 600;
 }
-
 .aqi-level.good {
     color: #10b981;
 }
-
 .aqi-level.moderate {
     color: #f59e0b;
 }
-
 .aqi-level.unhealthy-sensitive {
     color: #f97316;
 }
-
 .aqi-level.unhealthy {
     color: #ef4444;
 }
-
 .aqi-level.very-unhealthy {
     color: #8b5cf6;
 }
-
 .aqi-level.hazardous {
     color: #7f1d1d;
 }
-
 .aqi-description {
     color: var(--gray);
     font-size: 14px;
 }
-
 .aqi-scale {
     display: flex;
     height: 8px;
@@ -708,12 +697,10 @@ body {
     overflow: hidden;
     margin: 10px 0;
 }
-
 .aqi-scale-segment {
     height: 100%;
     flex: 1;
 }
-
 .aqi-scale-segment:nth-child(1) {
     background-color: #10b981;
 }
