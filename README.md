@@ -42,17 +42,5 @@ const API_KEY = 'YOUR_API_KEY_HERE';
 ## 📈 Future Plans
 
 - 📍 Auto-location weather detection
-- 🌙 Dark mode toggle
 - 🔔 Severe weather alerts
 - 📱 Mobile app version
-
-## 🧑‍💻 Author
-
-**Gurleen Singh**  
-📧 gurleen0300.becse2@chitkara.edu.in  
-🏫 Chitkara University  
-📍 India
-
-## 📄 License
-
-This project is licensed under the MIT License.
